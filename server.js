@@ -1,4 +1,6 @@
-const pp = x => JSON.stringify(x, null, 2);
+yaml = require('js-yaml');
+fs   = require('fs');
+
 
 // database is let instead of const to allow us to modify it in test.js
 let database = {
@@ -8,6 +10,21 @@ let database = {
   comments: {},
   nextCommentId: 1
 };
+
+function loadDatabase() {
+  fs.readFile('./database.yml', 'utf8', function (e, data) {
+    if (e) {
+      console.log('database.yml not found.');
+    } else {
+      database = yaml.safeLoad(data, 'utf8');
+      console.log(database);
+    }
+  })
+}
+
+function saveDatabase() {
+  yaml.dump (database);
+}
 
 const routes = {
   '/users': {
