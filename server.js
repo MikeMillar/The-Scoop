@@ -1,6 +1,5 @@
-yaml = require('js-yaml');
-fs   = require('fs');
-
+const yaml = require('yaml-js');
+const fs = require('fs');
 
 // database is let instead of const to allow us to modify it in test.js
 let database = {
@@ -12,18 +11,21 @@ let database = {
 };
 
 function loadDatabase() {
-  fs.readFile('./database.yml', 'utf8', function (e, data) {
-    if (e) {
-      console.log('database.yml not found.');
-    } else {
-      database = yaml.safeLoad(data, 'utf8');
-      console.log(database);
-    }
-  })
+  fs.readFile('database.yml', function(err, buf) {
+    let readFile = buf.toString();
+    database = yaml.load(readFile);
+    console.log(database);
+  });
+
+
 }
 
 function saveDatabase() {
-  yaml.dump (database);
+  fs.writeFile('database.yml', database, function(err, data){
+    if (err) console.log(err);
+    yaml.dump(database);
+      console.log("Successfully Written to File.");
+  });
 }
 
 const routes = {
