@@ -21,9 +21,8 @@ function loadDatabase() {
 }
 
 function saveDatabase() {
-  fs.writeFile('database.yml', database, function(err, data){
+  fs.writeFile('database.yml', yaml.dump(database), function(err, data){
     if (err) console.log(err);
-    yaml.dump(database);
       console.log("Successfully Written to File.");
   });
 }

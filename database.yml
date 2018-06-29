@@ -1,5 +1,87 @@
-users: {}
-articles: {}
-nextArticleId: 1
-comments: {}
-nextCommentId: 1
+users:
+  test1:
+    username: test1
+    articleIds: [1]
+    commentIds: []
+  test2:
+    username: test2
+    articleIds: [2]
+    commentIds: [1]
+  test3:
+    username: test3
+    articleIds: [3]
+    commentIds: [2]
+  test4:
+    username: test4
+    articleIds: [4]
+    commentIds: [3, 4]
+articles:
+  '1':
+    id: 1
+    title: test1
+    url: test1
+    username: test1
+    commentIds: [4]
+    upvotedBy: [test3]
+    downvotedBy: [test2, test4]
+    comments: []
+  '2':
+    id: 2
+    title: test2
+    url: test2
+    username: test2
+    commentIds: [1]
+    upvotedBy: [test2, test3, test4]
+    downvotedBy: []
+    comments:
+    - &id0001
+      id: 1
+      articleId: 2
+      username: test2
+      body: test2
+      upvotedBy: [test4]
+      downvotedBy: []
+  '3':
+    id: 3
+    title: test3
+    url: test3
+    username: test3
+    commentIds: [2]
+    upvotedBy: [test3]
+    downvotedBy: []
+    comments:
+    - &id0002
+      id: 2
+      articleId: 3
+      username: test3
+      body: test3
+      upvotedBy: []
+      downvotedBy: [test4]
+  '4':
+    id: 4
+    title: test4
+    url: test4
+    username: test4
+    commentIds: [3]
+    upvotedBy: [test4]
+    downvotedBy: []
+    comments: []
+nextArticleId: 5
+comments:
+  '1': *id0001
+  '2': *id0002
+  '3':
+    id: 3
+    articleId: 4
+    username: test4
+    body: test4
+    upvotedBy: [test4]
+    downvotedBy: []
+  '4':
+    id: 4
+    articleId: 1
+    username: test4
+    body: test5
+    upvotedBy: []
+    downvotedBy: [test4]
+nextCommentId: 5
