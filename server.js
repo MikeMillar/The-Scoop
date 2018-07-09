@@ -12,7 +12,7 @@ let database = {
 
 function loadDatabase() {
   fs.readFile('database.yml', function(err, buf) {
-    let readFile = buf.toString();
+    const readFile = buf.toString();
     database = yaml.load(readFile);
     console.log(database);
   });
@@ -273,7 +273,7 @@ function createComment(url, request) {
     database.users[comment.username].commentIds.push(comment.id);
     database.articles[comment.articleId].commentIds.push(comment.id);
 
-    response.body = {comment: comment};
+    response.body = {comment};
     response.status = 201;
   } else {
     response.status = 400;
